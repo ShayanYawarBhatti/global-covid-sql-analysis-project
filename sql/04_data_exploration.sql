@@ -52,6 +52,7 @@ ORDER BY location, date;
 ------------------------------------------------------------
 -- 4. Total cases vs population
 -- Shows reported COVID cases as a percentage of the population
+-- for the United States
 ------------------------------------------------------------
 
 SELECT 
@@ -67,7 +68,25 @@ ORDER BY location, date;
 
 
 ------------------------------------------------------------
--- 5. Countries with the highest infection rate
+-- 5. Infection rate over time by country
+-- Useful for Tableau visualizations that need country, date,
+-- population, total cases, and percent population infected
+------------------------------------------------------------
+
+SELECT 
+    location, 
+    population,
+    date, 
+    MAX(total_cases) AS highest_infection_count, 
+    ROUND((MAX(total_cases) / NULLIF(population, 0)) * 100, 2) AS percent_population_infected
+FROM dbo.CovidDeaths
+WHERE continent IS NOT NULL
+GROUP BY location, population, date
+ORDER BY percent_population_infected DESC;
+
+
+------------------------------------------------------------
+-- 6. Countries with the highest infection rate
 -- Compares each country's highest reported case count to its population
 ------------------------------------------------------------
 
@@ -83,7 +102,7 @@ ORDER BY percent_population_infected DESC;
 
 
 ------------------------------------------------------------
--- 6. Countries with the highest total death count
+-- 7. Countries with the highest total death count
 ------------------------------------------------------------
 
 SELECT 
@@ -96,7 +115,7 @@ ORDER BY total_death_count DESC;
 
 
 ------------------------------------------------------------
--- 7. Highest country-level death count within each continent
+-- 8. Highest country-level death count within each continent
 -- Note: This shows the maximum country death count per continent,
 -- not total deaths across the entire continent.
 ------------------------------------------------------------
@@ -111,7 +130,7 @@ ORDER BY highest_country_death_count DESC;
 
 
 ------------------------------------------------------------
--- 8. Total reported deaths by continent
+-- 9. Total reported deaths by continent
 -- This sums daily new deaths across countries in each continent.
 ------------------------------------------------------------
 
@@ -125,7 +144,7 @@ ORDER BY total_death_count DESC;
 
 
 ------------------------------------------------------------
--- 9. Global death percentage
+-- 10. Global death percentage
 -- Shows total global reported cases, deaths, and death percentage
 ------------------------------------------------------------
 
@@ -138,7 +157,7 @@ WHERE continent IS NOT NULL;
 
 
 ------------------------------------------------------------
--- 10. Global numbers by date
+-- 11. Global numbers by date
 -- Shows daily global reported cases, deaths, and death percentage
 ------------------------------------------------------------
 
@@ -154,12 +173,12 @@ ORDER BY date;
 
 
 ------------------------------------------------------------
--- 11. Total population vs vaccinations
+-- 12. Total population vs vaccinations
 -- Calculates a rolling vaccination count by location
 -- and compares it to population
 ------------------------------------------------------------
 
-WITH PopVsVac AS (
+;WITH PopVsVac AS (
     SELECT 
         d.continent, 
         d.location, 
