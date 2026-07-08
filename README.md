@@ -98,7 +98,7 @@ This view can be used later for Tableau or Power BI visualizations.
 
 ## Notes
 
-This project was completed using SQL Server running locally in Docker on macOS. The SQL Server import wizard initially inferred incorrect data types, so the data loading process was handled manually using table creation scripts and `BULK INSERT`.
+This project was completed using SQL Server running locally in Docker on macOS. The SQL Server import wizard initially inferred incorrect data types, so for the data loading process I manually used table creation scripts and `BULK INSERT`.
 
 ## Next Steps
 
