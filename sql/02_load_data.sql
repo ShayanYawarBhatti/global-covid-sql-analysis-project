@@ -1,6 +1,18 @@
 USE PortfolioProject;
 GO
 
+------------------------------------------------------------
+-- Load COVID datasets into SQL Server
+--
+-- This script creates the CovidDeaths and CovidVaccinations
+-- tables and loads data from CSV files using BULK INSERT.
+--
+-- Note: The CSV files must already be copied into the SQL Server
+-- Docker container at:
+-- /tmp/CovidDeaths.csv
+-- /tmp/CovidVaccinations.csv
+------------------------------------------------------------
+
 DROP TABLE IF EXISTS dbo.CovidDeaths;
 GO
 
