@@ -1,6 +1,11 @@
 USE PortfolioProject;
 GO
 
+------------------------------------------------------------
+-- Import validation
+-- Confirms row counts and previews imported data
+------------------------------------------------------------
+
 SELECT COUNT(*) AS CovidDeaths_RowCount
 FROM dbo.CovidDeaths;
 
