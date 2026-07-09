@@ -7,6 +7,7 @@
 -- but it does not usually store a separate copy of the data.
 ------------------------------------------------------------
 
+USE PortfolioProject;
 GO
 
 CREATE OR ALTER VIEW dbo.PercentPopulationVaccinated AS
